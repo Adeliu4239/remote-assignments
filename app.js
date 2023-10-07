@@ -4,6 +4,8 @@ const port = 3000
 
 const userRoute = require('./routes/user_route');
 
+app.use(express.json()); // for parsing application/json
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
@@ -13,6 +15,7 @@ app.get('/', (req, res) => {
 //   });
 app.use('/healthcheck', require('./routes/healthchecker'));
 app.use('/users', userRoute);
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
