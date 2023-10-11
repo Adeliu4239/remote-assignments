@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 // app.get('/healthcheck', (req, res) => {
 //     res.send('OK');
 //   });
-app.use('/healthcheck', require('./routes/healthChecker'));
+app.use('/healthcheck', require('./routes/healthyChecker'));
 app.use('/users', userRoute);
 
 
