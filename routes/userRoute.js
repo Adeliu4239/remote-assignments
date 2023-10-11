@@ -1,8 +1,8 @@
 const express = require("express");
 const mysql = require("mysql2/promise");
-const errorRes = require("../utils/err_message");
+const bcrypt = require("bcrypt");
+const errorRes = require("../utils/errMessage");
 require("dotenv").config();
-// const poolConnection = require('../../utils/db_connection');
 
 const router = express.Router();
 
@@ -35,6 +35,7 @@ router.post("/", async (req, res) => {
       return res.status(errorCode).json({ error: errorMessage });
     }
 
+    const requestDate = req.headers["Request-Date"];
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
@@ -91,9 +92,12 @@ router.post("/", async (req, res) => {
       return res.status(errorCode).json({ error: errorMessage });
     }
 
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
     const [result] = await dbPool.query(
       "INSERT INTO user (name, email, password) VALUES (?, ?, ?)",
-      [name, email, password]
+      [name, email, hashedPassword]
     );
 
     const user = {
@@ -101,8 +105,6 @@ router.post("/", async (req, res) => {
       name,
       email,
     };
-
-    const requestDate = new Date().toUTCString();
 
     res.status(200).json({
       data: {
@@ -141,7 +143,7 @@ router.get("/", async (req, res) => {
       return res.status(errorCode).json({ error: errorMessage });
     }
 
-    const requestDate = req.headers["Request-Date "];
+    const requestDate = req.headers["Request-Date"];
 
     res.status(200).json({
       data: {

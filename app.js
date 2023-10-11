@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-const userRoute = require('./routes/user_route');
+const userRoute = require('./routes/userRoute');
 
 app.use(express.json()); // for parsing application/json
 
@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 // app.get('/healthcheck', (req, res) => {
 //     res.send('OK');
 //   });
-app.use('/healthcheck', require('./routes/healthchecker'));
+app.use('/healthcheck', require('./routes/healthChecker'));
 app.use('/users', userRoute);
 
 
