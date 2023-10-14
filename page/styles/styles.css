@@ -1,0 +1,41 @@
+body {
+  font-family: Arial, sans-serif;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.signUpForm {
+  width: 60%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 10px;
+  display: inline-block;
+  border: 1px solid #ccc;
+}
+label {
+  font-weight: 600;
+}
+.submitBtn {
+  background-color: #4e55e5;
+  border-radius: 10px;
+  color: white;
+  padding: 10px 0;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 25%;
+}

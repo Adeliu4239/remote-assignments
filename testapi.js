@@ -16,7 +16,7 @@ async function sendPostRequest() {
         },
       };
   
-      const response = await axios.post("http://localhost:3000/users", requestData, config);
+      const response = await axios.post("https://35.74.134.49:3000/users", requestData, config);
   
       console.log("POST Response:", response.data);
     } catch (error) {
@@ -44,4 +44,4 @@ async function sendGetRequest() {
   }
 
 sendPostRequest();
-sendGetRequest();
+// sendGetRequest();

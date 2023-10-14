@@ -143,7 +143,7 @@ router.get("/", async (req, res) => {
       return res.status(errorCode).json({ error: errorMessage });
     }
 
-    const requestDate = req.headers["Request-Date"];
+    const requestDate = req.headers["request-date"];
 
     res.status(200).json({
       data: {
