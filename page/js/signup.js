@@ -13,28 +13,28 @@ async function signup(event) {
     console.log("Email: ", email);
     console.log("Password: ", password);
 
-    const response = await axios.post("http://35.74.134.49:3000/users", {
-      headers: {
-        "Content-Type": "application/json",
-        "Request-Date": formattedDate,
-        "Access-Control-Allow-Origin": "*",
-      },
-      data: JSON.stringify({ username, email, password }),
-    });
+    const headers = {
+      "Content-Type": "application/json",
+      "Request-Date": formattedDate,
+    };
 
-    const data = response.data;
-    console.log(data);
-    if (data.error) {
-      if (data.error.code === 409) {
-        alert("Email already exists");
-      } else {
-        alert("An error occurred");
-      }
-    } else {
-      const { id, name, email } = data;
+    const requestBody = {
+      name: username,
+      email,
+      password,
+    };
+
+    console.log(requestBody);
+    const response = await axios.post("http://35.74.134.49:3000/users", requestBody, {
+      headers,
+    });
+    console.log(response);
+    if (response.status === 200) {
+      const { id, name, email } = response.data.data.user;
       alert(`ID: ${id}\nName: ${name}\nEmail: ${email}`);
-    }
+    } 
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Error:", error.response);
+    alert(error.response.data.error? error.response.data.error : "Something went wrong");
   }
 }
